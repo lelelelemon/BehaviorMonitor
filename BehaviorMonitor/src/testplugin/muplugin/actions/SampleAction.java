@@ -10,6 +10,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 import org.eclipse.ui.PlatformUI;
 
+import date.DateUtil;
 import base.PMHibernateImpl;
 import bean.FileReading;
 
@@ -40,6 +41,7 @@ public class SampleAction implements IWorkbenchWindowActionDelegate {
 	public void run(IAction action) {
 		MessageDialog.openInformation(window.getShell(), "Muplugin",
 				"open start");
+		System.out.println(DateUtil.format(new Date(), "yyyy-MM-dd hh:mm:ss"));
 
 	}
 
@@ -60,7 +62,7 @@ public class SampleAction implements IWorkbenchWindowActionDelegate {
 			FileReading FileReading = new FileReading();
 			FileReading.setName(this.toolTip);
 			FileReading.setPath(path);
-			FileReading.setStart_time(date);
+			FileReading.setStartTime(date);
 			PMHibernateImpl.getInstance().save(FileReading);
 			System.out.println("the name of editor is"
 					+ editor.getEditorInput().getToolTipText());

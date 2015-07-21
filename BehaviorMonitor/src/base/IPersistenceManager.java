@@ -13,7 +13,9 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import bean.FileReading;
 import bean.OnlineText;
+import bean.RecomRelation;
 import bean.SiteReading;
 
 /**
@@ -122,4 +124,12 @@ public interface IPersistenceManager {
 	public List<SiteReading> retrieveSiteReading();
 
 	public List<OnlineText> retrieveOnlineText();
+
+	public List<SiteReading> retrieveSiteReadingByTime(String start, String end);
+
+	public List<RecomRelation> retrieveRecomRelat(String filename);
+
+	public List<String> retrieveRecomWeb(String filename);
+
+	public List<FileReading> retrieveFileReading(String start, String end);
 }

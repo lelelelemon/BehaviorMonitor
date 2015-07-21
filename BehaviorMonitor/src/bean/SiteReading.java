@@ -3,19 +3,18 @@ package bean;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
+import org.hibernate.annotations.Type;
 
 import base.BaseModelObject;
 
 @Entity
 public class SiteReading extends BaseModelObject {
-	private String site_id;
 
-	private String address = "";
+	private String site_id;
+	@Type(type = "text")
+	private String address;
 	private String host;
 	private Date startTime;
 	private Date endTime;

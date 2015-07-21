@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.time.DateUtils;
+
 import base.PMHibernateImpl;
 import bean.SiteReading;
 import date.DateUtil;
@@ -27,16 +29,21 @@ public class SiteExtraction {
 		return false;
 	}
 
-	public static void main(String[] args) {
-		//new SiteExtraction().extractSite("BrowserHistory.txt");
-		retrieveBrowserHis("history.xml");
-//		System.out.println(PMHibernateImpl.getInstance().retrieveSiteReading()
-//				.size());
+	public static void main(String[] args) throws ParseException {
+		String time = " 2015-7-20";
+		String time2 = "2015-7-21 00:00:00";
+		System.out.println("d1 is " + time);
+		// new SiteExtraction().extractSite("BrowserHistory.txt");
+		// retrieveBrowserHis("history3.xml");
+		int size = PMHibernateImpl.getInstance()
+				.retrieveSiteReadingByTime(time, time2).size();
+		System.out.println("size is : " + size);
+		// System.out.println(PMHibernateImpl.getInstance().retrieveSiteReading()
+		// .size());
 	}
 
 	public static void retrieveBrowserHis(String filename) {
-		Map<String, String> historys = XMLReaderTest
-				.readXMLString(filename);
+		Map<String, String> historys = XMLReaderTest.readXMLString(filename);
 		for (String key : historys.keySet()) {
 			String value = historys.get(key);
 			Date startTime;
@@ -45,6 +52,7 @@ public class SiteExtraction {
 				SiteReading browserHis = new SiteReading();
 				browserHis.setAddress(key);
 				browserHis.setStartTime(startTime);
+				System.out.println("Start time is : " + startTime);
 				PMHibernateImpl.getInstance().save(browserHis);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block

@@ -7,6 +7,7 @@ package base;
 import java.io.File;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -19,7 +20,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
+import bean.FileReading;
 import bean.OnlineText;
+import bean.RecomRelation;
 import bean.SiteReading;
 
 /**
@@ -140,10 +143,39 @@ public class PMHibernateImpl extends HibernateDaoSupport implements
 		return siteReadings;
 	}
 
+	// get siteReading between start and end
+	public List<SiteReading> retrieveSiteReadingByTime(String start, String end) {
+		List<SiteReading> siteReadings = (List<SiteReading>) getHibernateSession()
+				.createQuery(
+						"from SiteReading where startTime > '" + start
+								+ "' and startTime < '" + end + "'").list();
+		return siteReadings;
+	}
+
 	public List<OnlineText> retrieveOnlineText() {
 		List<OnlineText> onlineText = (List<OnlineText>) getHibernateSession()
 				.createQuery("from OnlineText").list();
 		return onlineText;
+	}
+
+	public List<RecomRelation> retrieveRecomRelat(String filename) {
+		List<RecomRelation> recomRelation = (List<RecomRelation>) getHibernateSession()
+				.createQuery("from RecomRelation").list();
+		return recomRelation;
+	}
+
+	public List<String> retrieveRecomWeb(String filename) {
+		List<String> recomRelation = (List<String>) getHibernateSession()
+				.createQuery("select webSite from RecomRelation").list();
+		return recomRelation;
+	}
+
+	public List<FileReading> retrieveFileReading(String start, String end) {
+		List<FileReading> fileReadings = (List<FileReading>) getHibernateSession()
+				.createQuery(
+						"from FileReading where startTime > '" + start
+								+ "' and startTime < '" + end + "'").list();
+		return fileReadings;
 	}
 
 }
