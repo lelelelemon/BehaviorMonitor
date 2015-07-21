@@ -7,7 +7,6 @@ package base;
 import java.io.File;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -20,6 +19,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
+import bean.Duration;
 import bean.FileReading;
 import bean.OnlineText;
 import bean.RecomRelation;
@@ -176,6 +176,12 @@ public class PMHibernateImpl extends HibernateDaoSupport implements
 						"from FileReading where startTime > '" + start
 								+ "' and startTime < '" + end + "'").list();
 		return fileReadings;
+	}
+
+	public List<Duration> retrieveDuration() {
+		List<Duration> durations = (List<Duration>) getHibernateSession()
+				.createQuery("from Duration order by startTime DESC limit 1").list();
+		return durations;
 	}
 
 }

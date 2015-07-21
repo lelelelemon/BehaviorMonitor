@@ -23,7 +23,6 @@ public class SiteExtraction {
 			SiteReading siteReading = new SiteReading();
 			siteReading.setAddress(site);
 			siteReading.setHost(siteReading.getHost());
-
 			PMHibernateImpl.getInstance().save(siteReading);
 		}
 		return false;
@@ -54,6 +53,29 @@ public class SiteExtraction {
 				browserHis.setStartTime(startTime);
 				System.out.println("Start time is : " + startTime);
 				PMHibernateImpl.getInstance().save(browserHis);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+	}
+
+	public static void retrieveBrowserHisWithLimit(String filename, Date start,
+			Date end) {
+		Map<String, String> historys = XMLReaderTest.readXMLString(filename);
+		for (String key : historys.keySet()) {
+			String value = historys.get(key);
+			Date startTime;
+			try {
+				startTime = DateUtil.parse(value);
+				if (startTime.before(end) && startTime.after(start)) {
+					SiteReading browserHis = new SiteReading();
+					browserHis.setAddress(key);
+					browserHis.setStartTime(startTime);
+					System.out.println("Start time is : " + startTime);
+					PMHibernateImpl.getInstance().save(browserHis);
+				}
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

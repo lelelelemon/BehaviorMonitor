@@ -10,9 +10,10 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 import org.eclipse.ui.PlatformUI;
 
-import date.DateUtil;
 import base.PMHibernateImpl;
+import bean.Duration;
 import bean.FileReading;
+import date.DateUtil;
 
 /**
  * Our sample action implements workbench action delegate. The action proxy will
@@ -25,6 +26,8 @@ import bean.FileReading;
 public class SampleAction implements IWorkbenchWindowActionDelegate {
 	private IWorkbenchWindow window;
 	private String toolTip = "nothing";
+	boolean start = false;
+	Duration duration = new Duration();
 
 	/**
 	 * The constructor.
@@ -39,9 +42,24 @@ public class SampleAction implements IWorkbenchWindowActionDelegate {
 	 * @see IWorkbenchWindowActionDelegate#run
 	 */
 	public void run(IAction action) {
-		MessageDialog.openInformation(window.getShell(), "Muplugin",
-				"open start");
-		System.out.println(DateUtil.format(new Date(), "yyyy-MM-dd hh:mm:ss"));
+		if (start == false) {
+			MessageDialog.openInformation(window.getShell(), "Muplugin",
+					"start");
+			Date st = new Date();
+			duration.setStart(st);
+			System.out.println(DateUtil.format(st, "yyyy-MM-dd hh:mm:ss"));
+			start = true;
+		} else {
+
+			Date stop = new Date();
+			duration.setEnd(stop);
+			PMHibernateImpl.getInstance().save(duration);
+			MessageDialog
+					.openInformation(window.getShell(), "Muplugin", "stop");
+			System.out.println(DateUtil.format(stop, "yyyy-MM-dd hh:mm:ss"));
+			start = false;
+			System.exit(0);
+		}
 
 	}
 
