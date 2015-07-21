@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;XMLReaderTest.java&apos; to &apos;BehaviorMonitor/src/IO&apos;&#x0A;- Original project: &apos;WebRecom&apos;&#x0A;- Destination element: &apos;BehaviorMonitor/src/IO&apos;&#x0A;- Original element: &apos;io.XMLReaderTest.java&apos;" description="Copy compilation unit" destination="=BehaviorMonitor/src&lt;IO" element1="/src&lt;io{XMLReaderTest.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1437479227039" units="1" version="1.0"/>
+</session>
