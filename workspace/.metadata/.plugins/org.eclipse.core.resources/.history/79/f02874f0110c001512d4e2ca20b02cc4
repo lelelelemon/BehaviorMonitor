@@ -1,0 +1,42 @@
+package bean;
+
+import javax.persistence.Entity;
+
+import org.hibernate.annotations.Type;
+
+import base.BaseModelObject;
+
+@Entity
+public class File extends BaseModelObject {
+	private String file_id;
+
+	public String getFile_id() {
+		return file_id;
+	}
+
+	public void setFile_id(String file_id) {
+		this.file_id = file_id;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	private String path;
+	private String name;
+
+	@Type(type="text")  
+	private String content;
+}

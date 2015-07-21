@@ -1,0 +1,11 @@
+/.DS_Store
+/Hibernate/
+/JGitUtil/
+/Main/
+/action/
+/bean/
+/dao/
+/dependence/
+/divideModule/
+/service/
+/struts.xml

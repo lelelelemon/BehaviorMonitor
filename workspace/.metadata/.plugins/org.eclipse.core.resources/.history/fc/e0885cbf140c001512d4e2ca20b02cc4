@@ -1,0 +1,12 @@
+package Operation;
+
+import IO.ReadFromFile;
+
+// extract site from files
+public class SiteExtraction {
+	// extract all site from history files
+	public boolean extractSite(String filepath){
+		ReadFromFile.readFileByLines(fileName);
+		return false;
+	}
+}

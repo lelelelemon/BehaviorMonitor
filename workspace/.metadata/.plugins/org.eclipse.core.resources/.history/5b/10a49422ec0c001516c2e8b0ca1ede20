@@ -1,0 +1,29 @@
+package bean;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import base.BaseModelObject;
+
+@Entity
+public class FileClassRelation extends BaseModelObject {
+	private String className;
+	private String fileAbsName;
+	@Id
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
+	}
+	@Id
+	public String getFileAbsName() {
+		return fileAbsName;
+	}
+
+	public void setFileAbsName(String fileAbsName) {
+		this.fileAbsName = fileAbsName;
+	}
+
+}

@@ -1,0 +1,19 @@
+package bean;
+
+public class FIleClassRelation {
+	private String className;
+	private String fileAbsName;
+	public String getClassName() {
+		return className;
+	}
+	public void setClassName(String className) {
+		this.className = className;
+	}
+	public String getFileAbsName() {
+		return fileAbsName;
+	}
+	public void setFileAbsName(String fileAbsName) {
+		this.fileAbsName = fileAbsName;
+	}
+	
+}

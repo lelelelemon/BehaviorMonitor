@@ -1,0 +1,17 @@
+package Main;
+
+import java.util.List;
+
+import Operation.HTMLParserExtraction;
+import base.PMHibernateImpl;
+import bean.SiteReading;
+
+public class Main {
+	public static void main(String[] args) {
+		List<SiteReading> siteReadings = PMHibernateImpl.getInstance()
+				.retrieveSiteReading();
+		for (SiteReading siteReading : siteReadings) {
+			HTMLParserExtraction.extractCNBLOG(siteReading.getAddress());
+		}
+	}
+}

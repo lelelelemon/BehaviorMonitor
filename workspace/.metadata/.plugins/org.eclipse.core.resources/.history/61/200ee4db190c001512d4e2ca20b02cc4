@@ -1,0 +1,11 @@
+package Main;
+
+import base.PMHibernateImpl;
+
+public class Main {
+	public static void main(String[] args) {
+		// new SiteExtraction().extractSite("BrowserHistory.txt");
+		System.out.println(PMHibernateImpl.getInstance().retrieveSiteReading()
+				.size());
+	}
+}

@@ -1,0 +1,7 @@
+package Operation;
+//extract all files in a project
+public class FileExtraction {
+public static void main(String[] args){
+	System.getProperty("user.dir")
+} 
+}

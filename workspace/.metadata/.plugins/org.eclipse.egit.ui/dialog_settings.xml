@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="0" key="org.eclipse.egit.ui.internal.clone.GitSelectWizardPageWizardSel"/>
+	<item value="/Users/lemon/git/HomeLibrary/.git" key="GitSelectRepositoryPage.lastRepository"/>
+	<list key="RepositorySelectionPage.UsedUris">
+		<item value="file:////Users/lemon/git/HomeLibrary"/>
+		<item value="https://github.com/timp21337/htmlparser.git"/>
+		<item value="https://github.com/basti1302/startexplorer"/>
+		<item value="https://lemon2008@bitbucket.org/HaiWang/debug_helper.git"/>
+		<item value="https://bitbucket.org/GkiOllDer/eclipsemonitor"/>
+	</list>
+	<section name="GitImportWizard">
+		<item value="true" key="GitProjectsImportPage.STORE_NESTED_PROJECTS"/>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.pull.PullResultDialog.dialogBounds">
+		<item value="671" key="DIALOG_WIDTH"/>
+		<item value="1|.Helvetica Neue DeskInterface|11.0|0|COCOA|1|.HelveticaNeueDeskInterface-Regular" key="DIALOG_FONT_NAME"/>
+		<item value="389" key="DIALOG_HEIGHT"/>
+		<item value="385" key="DIALOG_X_ORIGIN"/>
+		<item value="179" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

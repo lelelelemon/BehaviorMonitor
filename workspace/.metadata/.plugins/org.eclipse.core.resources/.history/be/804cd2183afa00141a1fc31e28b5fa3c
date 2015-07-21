@@ -1,0 +1,8 @@
+package Operation;
+// extract site from files
+public class SiteExtraction {
+	// extract all site from 
+	public boolean extractSite(String filepath){
+		return false;
+	}
+}

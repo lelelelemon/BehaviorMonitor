@@ -1,0 +1,39 @@
+package bean;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
+import base.BaseModelObject;
+
+@Entity
+public class SiteReading extends BaseModelObject {
+	private String site_id;
+	
+	private String address = "";
+	private String host;
+
+	public String getSite_id() {
+		return site_id;
+	}
+
+	public void setSite_id(String site_id) {
+		this.site_id = site_id;
+	}
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+public void setHost(){
+	
+}
+	public String getHost() {
+		return this.address.split("/")[0];
+	}
+}

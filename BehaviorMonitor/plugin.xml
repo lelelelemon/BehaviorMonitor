@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            label="Sample Action Set"
+            visible="true"
+            id="test-plugin.muplugin.actionSet">
+         <menu
+               label="我的空间"
+               id="sampleMenu">
+            <separator
+                  name="sampleGroup">
+            </separator>
+         </menu>
+         <action
+               label="天气预报"
+               icon="icons/sample.gif"
+               class="testplugin.muplugin.actions.SampleAction"
+               tooltip="open the window"
+               menubarPath="sampleMenu/sampleGroup"
+               toolbarPath="sampleGroup"
+               id="testplugin.muplugin.actions.SampleAction">
+               
+         </action>
+        
+      </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editorActions">
+      <editorContribution
+            id="test-plugin.muplugin.editorContribution1"
+            class="test-plugin.muplugin.editorContribution1.GenerateCodeAction"
+            targetID="test-plugin.muplugin.editorContribution1">
+      </editorContribution>
+   </extension>
+
+</plugin>

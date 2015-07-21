@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.sql.DriverManager"/>
+<fullyQualifiedTypeName name="java.io.FileWriter"/>
+<fullyQualifiedTypeName name="java.io.BufferedWriter"/>
+<fullyQualifiedTypeName name="org.eclipse.core.commands.ExecutionEvent"/>
+<fullyQualifiedTypeName name="org.eclipse.ui.handlers.HandlerUtil"/>
+<fullyQualifiedTypeName name="org.eclipse.core.resources.IResource"/>
+<fullyQualifiedTypeName name="java.util.concurrent.ExecutionException"/>
+<fullyQualifiedTypeName name="org.eclipse.core.resources.IFile"/>
+<fullyQualifiedTypeName name="org.eclipse.jdt.core.IJavaElement"/>
+<fullyQualifiedTypeName name="org.eclipse.jdt.internal.core.JarPackageFragmentRoot"/>
+<fullyQualifiedTypeName name="org.eclipse.jdt.core.IPackageFragmentRoot"/>
+<fullyQualifiedTypeName name="org.eclipse.jdt.core.IPackageFragment"/>
+<fullyQualifiedTypeName name="java.io.IOException"/>
+<fullyQualifiedTypeName name="java.awt.Composite"/>
+<fullyQualifiedTypeName name="org.eclipse.ui.part.ViewPart"/>
+<fullyQualifiedTypeName name="org.eclipse.jface.viewers.ISelection"/>
+<fullyQualifiedTypeName name="org.eclipse.ui.IWorkbenchPart"/>
+<fullyQualifiedTypeName name="org.eclipse.jface.viewers.IStructuredSelection"/>
+<fullyQualifiedTypeName name="org.eclipse.ui.ISelectionService"/>
+<fullyQualifiedTypeName name="org.eclipse.ui.IEditorPart"/>
+<fullyQualifiedTypeName name="org.htmlparser.filters.StringFilter"/>
+<fullyQualifiedTypeName name="org.htmlparser.filters.TagNameFilter"/>
+<fullyQualifiedTypeName name="java.util.regex.Matcher"/>
+<fullyQualifiedTypeName name="java.awt.List"/>
+<fullyQualifiedTypeName name="com.meterware.httpunit.Base64"/>
+<fullyQualifiedTypeName name="java.util.Base64"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="org.hibernate.annotations.Type"/>
+<fullyQualifiedTypeName name="java.io.InputStream"/>
+<fullyQualifiedTypeName name="antlr.collections.List"/>
+<fullyQualifiedTypeName name="Operation.HTMLParserExtraction"/>
+<fullyQualifiedTypeName name="bean.File"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="IO.ReadFromFile"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="javax.persistence.Entity"/>
+</qualifiedTypeNameHistroy>

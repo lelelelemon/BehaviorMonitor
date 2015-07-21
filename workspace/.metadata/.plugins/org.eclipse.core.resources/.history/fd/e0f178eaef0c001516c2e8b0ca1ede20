@@ -1,0 +1,19 @@
+package bean;
+
+public class ClusterRelation {
+	private String name;
+	private String fileAbsPath;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getFileAbsPath() {
+		return fileAbsPath;
+	}
+	public void setFileAbsPath(String fileAbsPath) {
+		this.fileAbsPath = fileAbsPath;
+	}
+	
+}

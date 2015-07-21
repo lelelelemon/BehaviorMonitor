@@ -1,0 +1,7 @@
+package bean;
+
+public class FIleClassRelation {
+	private String className;
+	private String fileAbsName;
+	
+}

@@ -1,0 +1,56 @@
+drop table if exists PBook;
+create table PBook(
+	bookId int AUTO_INCREMENT,
+	bookName varchar(50),
+	status int,
+	primary key(bookId, bookName)
+);
+drop table if exists EBook;
+create table EBook(
+	bookId int AUTO_INCREMENT,
+	bookName varchar(50),
+	primary key(bookId),
+	bookUrl varchar(50)
+);
+
+drop table if exists BorrowRecord;
+create table BorrowRecord(
+	borrowRecordId int AUTO_INCREMENT,
+	bookId varchar(50) not null,
+	friendName varchar(50),
+	borrowDate timestamp,
+	returnDate timestamp,
+	primary key(borrowRecordId)
+);
+
+drop table if exists Friend;
+create table Friend(
+	friendName varchar(50),
+	primary key(friendName)
+);
+
+drop table if exists Note;
+create table Note(
+	noteId int AUTO_INCREMENT,
+	readingId int,
+	title varchar(50),
+	content varchar(100),
+	primary key(noteId)
+);
+
+drop table if exists CommentURI;
+create table CommentURI(
+	commentId int AUTO_INCREMENT,
+	bookId varchar(50),
+	URI varchar(50),
+	primary key(commentId)
+);
+
+drop table if exists Reading;
+create table Reading(
+	readingId int AUTO_INCREMENT,
+	bookId varchar(50),
+	start TimeStamp,
+	end TimeStamp,
+	primary key(readingId)
+);

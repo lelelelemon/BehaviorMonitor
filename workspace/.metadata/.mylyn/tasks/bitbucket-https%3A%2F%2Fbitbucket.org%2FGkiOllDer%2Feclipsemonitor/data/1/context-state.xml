@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContextState>
+<org.eclipse.mylyn.context.ui.editors>
+<MonitoredWindowOpenEditors class="org.eclipse.ui.internal.WorkbenchWindow" isActive="true" isLaunching="true" number="0">
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ActivityContextManager.java" partName="ActivityContextManager.java" title="ActivityContextManager.java" tooltip="EclipseMonitor/src/cn/edu/fudan/se/eclipsemonitor/ActivityContextManager.java">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/EclipseMonitor/src/cn/edu/fudan/se/eclipsemonitor/ActivityContextManager.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="11" selectionOffset="1085" selectionTopPixel="50"/>
+</editor>
+</MonitoredWindowOpenEditors>
+</org.eclipse.mylyn.context.ui.editors>
+</ContextState>

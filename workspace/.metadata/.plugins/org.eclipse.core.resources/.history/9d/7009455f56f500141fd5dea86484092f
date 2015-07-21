@@ -1,0 +1,100 @@
+import java.io.*;
+import java.net.URL;
+import java.net.URLConnection;
+import org.htmlparser.*;
+import org.htmlparser.filters.*;
+import org.htmlparser.nodes.*;
+import org.htmlparser.tags.*;
+import org.htmlparser.util.*;
+import org.htmlparser.visitors.*;
+
+public class HTMLParserTest {
+	public static void main(String args[]) throws Exception {
+		String path = "http://www.baidu.com/s?wd=htmlparser%E8%8E%B7%E5%8F%96%E7%BD%91%E9%A1%B5%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9&rsv_spt=1&issp=1&f=8&rsv_bp=1&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=1&rsv_pq=cafd051e0000d2fe&rsv_t=adfbgEZ03DkMhkmYgAZbDEB8pbUHptkXwrUtMZoFvstHiNgCC2Ze949O2iXt%2Fxipx5a9&inputT=9305&rsv_sug1=33&rsv_sug3=64&rsv_sug2=0&rsv_sug4=9695";
+		URL url = new URL(path);
+		URLConnection conn = url.openConnection();
+		conn.setDoOutput(true);
+		InputStream inputStream = conn.getInputStream();
+		InputStreamReader isr = new InputStreamReader(inputStream, "utf8");
+		StringBuffer sb = new StringBuffer();
+		BufferedReader in = new BufferedReader(isr);
+		String inputLine;
+		while ((inputLine = in.readLine()) != null) {
+			sb.append(inputLine);
+			sb.append("\n");
+		}
+		String result = sb.toString();
+		readByHtml(result);
+		readTextAndLinkAndTitle(result);
+	}
+
+	/** */
+	/** * 按页面方式处理.解析标准的html页面 * @param content 网页的内容 * @throws Exception */
+	public static void readByHtml(String content) throws Exception {
+		Parser myParser;
+		myParser = Parser.createParser(content, "utf8");
+		HtmlPage visitor = new HtmlPage(myParser);
+		myParser.visitAllNodesWith(visitor);
+		String textInPage = visitor.getTitle();
+		//System.out.println(textInPage);
+		NodeList nodelist;
+		nodelist = visitor.getBody();
+		//System.out.print(nodelist.asString().trim());
+	}
+
+	/** */
+	/** * 分别读纯文本和链接. * @param result 网页的内容 * @throws Exception */
+	public static void readTextAndLinkAndTitle(String result) throws Exception {
+		Parser parser;
+		NodeList nodelist;
+		parser = Parser.createParser(result, "utf8");
+		NodeFilter textFilter = new NodeClassFilter(TextNode.class);
+		NodeFilter linkFilter = new NodeClassFilter(LinkTag.class);
+		NodeFilter titleFilter = new NodeClassFilter(TitleTag.class);
+		OrFilter lastFilter = new OrFilter();
+		lastFilter.setPredicates(new NodeFilter[] { textFilter, linkFilter,
+				titleFilter });
+		nodelist = parser.parse(lastFilter);
+		Node[] nodes = nodelist.toNodeArray();
+		String line = "";
+		for (int i = 0; i < nodes.length; i++) {
+			Node node = nodes[i];
+			if (node instanceof TextNode) {
+				TextNode textnode = (TextNode) node;
+				line = textnode.getText();
+
+				System.out.println(line);
+			} else if (node instanceof LinkTag) {
+				LinkTag link = (LinkTag) node;
+				line = link.getLink();
+			} else if (node instanceof TitleTag) {
+				TitleTag titlenode = (TitleTag) node;
+				line = titlenode.getTitle();
+			}
+			if (isTrimEmpty(line))
+				continue;
+		}
+	}
+
+	/** */
+	/** * 去掉左右空格后字符串是否为空 */
+	public static boolean isTrimEmpty(String astr) {
+		if ((null == astr) || (astr.length() == 0)) {
+			return true;
+		}
+		if (isBlank(astr.trim())) {
+			return true;
+		}
+		return false;
+	}
+
+	/** */
+	/** * 字符串是否为空:null或者长度为0. */
+	public static boolean isBlank(String astr) {
+		if ((null == astr) || (astr.length() == 0)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+}

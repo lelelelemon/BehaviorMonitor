@@ -1,0 +1,6 @@
+package bean;
+
+public class Cluster {
+	private String name;
+	private String
+}

@@ -1,0 +1,193 @@
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.htmlparser.Parser;
+import org.htmlparser.filters.NodeClassFilter;
+import org.htmlparser.tags.HeadingTag;
+import org.htmlparser.tags.LinkTag;
+import org.htmlparser.tags.MetaTag;
+import org.htmlparser.tags.ParagraphTag;
+import org.htmlparser.tags.TitleTag;
+import org.htmlparser.util.NodeList;
+import org.htmlparser.util.ParserException;
+
+import java.util.Set;
+import multi.patt.match.ac.*;
+
+public class HtmlFileParser {
+    String filepath=new String();//html文件路径
+    private static String[] keyWords;//关键词列表
+    /*static{
+        keyWords=read("filePath");//从指定文件中读取关键词列表
+    }*/
+    public HtmlFileParser(String filepath){
+        this.filepath=filepath;
+    }
+    public String getTitle(){//得到页面标题
+        FileAndEnc fae=readHtmlFile();
+        int i=0;
+        try{
+            //实例化一个本地html文件的Parser
+            Parser titleParser = Parser.createParser(fae.getFile(),fae.getEnc());
+            NodeClassFilter titleFilter =new NodeClassFilter(TitleTag.class);
+            NodeList titleList = titleParser.extractAllNodesThatMatch(titleFilter);
+            //实际上一个网页应该只有一个<title>标签，但extractAllNodesThatMatch方法返回的只能是一个NodeList
+            for (i = 0; i < titleList.size(); i++) {
+                TitleTag title_tag = (TitleTag) titleList.elementAt(i);
+                return title_tag.getTitle();
+            }
+        }catch(ParserException e) {
+            return null;
+        }
+        return null;
+    }
+    public String getEncoding(){//获得页面编码
+        FileAndEnc fae=readHtmlFile();
+        return fae.getEnc();
+    }
+    public float getRelatGrade(){//计算网页的主题相关度
+        FileAndEnc fae=readHtmlFile();
+        String file=fae.getFile();
+        String enC=fae.getEnc();
+        String curString;
+        int curWordWei = 1;//当前关键词权重
+        float curTagWei = 0;//当前标签权重
+        float totalGra = 0;//总相关度分
+        int i;
+        AcApply obj = new AcApply();//实例化ac自动机
+        Pattern p = null;
+        Matcher m = null;
+        try{//根据不同标签依次进行相关度计算
+            //title tag    <title>
+            curTagWei=5;
+            Parser titleParser = Parser.createParser(file,enC);
+            NodeClassFilter titleFilter =new NodeClassFilter(TitleTag.class);
+            NodeList titleList = titleParser.extractAllNodesThatMatch(titleFilter);
+            for (i = 0; i < titleList.size(); i++) {
+                TitleTag titleTag=(TitleTag)titleList.elementAt(i);
+                curString=titleTag.getTitle();
+                Set result = obj.findWordsInArray(keyWords, curString);//ac自动机的方法返回匹配的词的表
+                totalGra=totalGra+result.size()*curTagWei;//计算相关度
+            }
+            //meta tag of description and keyword <meta>
+            curTagWei=4;
+            Parser metaParser = Parser.createParser(file,enC);
+            NodeClassFilter metaFilter =new NodeClassFilter(MetaTag.class);
+            NodeList metaList = metaParser.extractAllNodesThatMatch(metaFilter);
+            p = Pattern.compile("\\b(description|keywords)\\b",Pattern.CASE_INSENSITIVE);
+            for (i = 0; i < metaList.size(); i++) {
+                MetaTag metaTag=(MetaTag)metaList.elementAt(i);
+                curString=metaTag.getMetaTagName();
+                if(curString==null){
+                    continue;
+                }
+                m = p.matcher(curString); //正则匹配name是description或keyword的<meta>标签
+                if(m.find()){
+                    curString=metaTag.getMetaContent();//提取其content
+                    Set result = obj.findWordsInArray(keyWords, curString);
+                    totalGra=totalGra+result.size()*curTagWei;
+                }
+                else{
+                    curString=metaTag.getMetaContent();
+                    Set result = obj.findWordsInArray(keyWords, curString);
+                    totalGra=totalGra+result.size()*2;
+                }
+            }
+            //heading tag <h*>
+            curTagWei=3;
+            Parser headingParser = Parser.createParser(file,enC);
+            NodeClassFilter headingFilter =new NodeClassFilter(HeadingTag.class);
+            NodeList headingList = headingParser.extractAllNodesThatMatch(headingFilter);
+            for (i = 0; i < headingList.size(); i++) {
+                HeadingTag headingTag=(HeadingTag)headingList.elementAt(i);
+                curString=headingTag.toPlainTextString();//得到<h*>标签中的纯文本
+                if(curString==null){
+                    continue;
+                }
+                Set result = obj.findWordsInArray(keyWords, curString);
+                totalGra=totalGra+result.size()*curTagWei;
+            }
+            //paragraph tag <p>
+            curTagWei=(float)2.5;
+            Parser paraParser = Parser.createParser(file,enC);
+            NodeClassFilter paraFilter =new NodeClassFilter(ParagraphTag.class);
+            NodeList paraList = paraParser.extractAllNodesThatMatch(paraFilter);
+            for (i = 0; i < paraList.size(); i++) {
+                ParagraphTag paraTag=(ParagraphTag)paraList.elementAt(i);
+                curString=paraTag.toPlainTextString();
+                if(curString==null){
+                    continue;
+                }
+                Set result = obj.findWordsInArray(keyWords, curString);
+                totalGra=totalGra+result.size()*curTagWei;
+            }
+            //link tag <a>
+            curTagWei=(float)0.25;
+            Parser linkParser = Parser.createParser(file,enC);
+            NodeClassFilter linkFilter =new NodeClassFilter(LinkTag.class);
+            NodeList linkList = linkParser.extractAllNodesThatMatch(linkFilter);
+            for (i = 0; i < linkList.size(); i++) {
+                LinkTag linkTag=(LinkTag)linkList.elementAt(i);
+                curString=linkTag.toPlainTextString();
+                if(curString==null){
+                    continue;
+                }
+                Set result = obj.findWordsInArray(keyWords, curString);
+                totalGra=totalGra+result.size()*curTagWei;
+            }        
+        }catch(ParserException e) {
+            return 0;
+        }
+        return totalGra;
+    }
+    private FileAndEnc readHtmlFile(){//读取html文件，返回字符串格式的文件与其编码
+        StringBuffer abstr = new StringBuffer();
+        FileAndEnc fae=new FileAndEnc();
+        try{
+            //实例化默认编码方式的BufferefReader
+            BufferedReader enCReader= new BufferedReader(new InputStreamReader(new FileInputStream(filepath),"UTF-8"));
+            String temp=null;
+            while((temp=enCReader.readLine())!=null){//得到字符串格式的文件
+                abstr.append(temp);
+                abstr.append("\r\n");
+            }
+            String result=abstr.toString();
+            fae.setFile(result);
+            String encoding=getEnc(result);
+            fae.setEnc(encoding);//得到页面编码
+            //根据得到的编码方式实例化BufferedReader
+            BufferedReader reader= new BufferedReader(new InputStreamReader(new FileInputStream(filepath),encoding));
+            StringBuffer abstrT = new StringBuffer();
+            while((temp=reader.readLine())!=null){
+                abstrT.append(temp);
+                abstrT.append("\r\n");
+            }
+            result=abstrT.toString();
+            fae.setFile(result);//得到真正的页面内容
+        } catch (FileNotFoundException e) {
+            System.out.println("file not found");
+            fae=null;
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            fae=null;
+        } finally {
+            return fae;
+        }
+    }
+    private String getEnc(String file){//根据正则匹配得到页面编码
+        String enC="utf-8";
+        Pattern p = Pattern.compile("(charset|Charset|CHARSET)\\s*=\\s*\"?\\s*([-\\w]*?)[^-\\w]"); 
+        Matcher m = p.matcher(file);
+        if(m.find()){ 
+            enC=m.group(2);
+        }
+        return enC;
+    }
+}

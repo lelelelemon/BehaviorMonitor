@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;HTMLParserTest.java&apos; to &apos;BehaviorMonitor/src/webIE&apos;&#x0A;- Original project: &apos;WebMonitor&apos;&#x0A;- Destination element: &apos;BehaviorMonitor/src/webIE&apos;&#x0A;- Original element: &apos;HTMLParserTest.java&apos;" description="Copy compilation unit" destination="=BehaviorMonitor/src&lt;webIE" element1="/src&lt;{HTMLParserTest.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1433567126836" units="1" version="1.0"/>
+</session>
