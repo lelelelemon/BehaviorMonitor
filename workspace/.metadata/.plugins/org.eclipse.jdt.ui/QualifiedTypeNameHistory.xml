@@ -26,7 +26,6 @@
 <fullyQualifiedTypeName name="java.awt.List"/>
 <fullyQualifiedTypeName name="com.meterware.httpunit.Base64"/>
 <fullyQualifiedTypeName name="java.util.Base64"/>
-<fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="org.hibernate.annotations.Type"/>
 <fullyQualifiedTypeName name="java.io.InputStream"/>
 <fullyQualifiedTypeName name="antlr.collections.List"/>
@@ -36,4 +35,5 @@
 <fullyQualifiedTypeName name="IO.ReadFromFile"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="javax.persistence.Entity"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
 </qualifiedTypeNameHistroy>

@@ -1,5 +1,7 @@
 package bean;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,6 +17,8 @@ public class SiteReading extends BaseModelObject {
 
 	private String address = "";
 	private String host;
+	private Date startTime;
+	private Date endTime;
 
 	public String getSite_id() {
 		return site_id;
@@ -39,4 +43,21 @@ public class SiteReading extends BaseModelObject {
 	public String getHost() {
 		return this.address.split("/")[2];
 	}
+
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+
 }

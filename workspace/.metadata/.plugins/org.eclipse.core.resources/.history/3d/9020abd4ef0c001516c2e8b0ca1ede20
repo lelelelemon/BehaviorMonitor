@@ -1,6 +1,0 @@
-package bean;
-
-public class ClusterRelation {
-	private String name;
-	private String filePath;
-}

@@ -2,15 +2,30 @@
 <section name="Workbench">
 	<item value="0" key="org.eclipse.egit.ui.internal.clone.GitSelectWizardPageWizardSel"/>
 	<item value="/Users/lemon/git/HomeLibrary/.git" key="GitSelectRepositoryPage.lastRepository"/>
+	<item value="true" key="CommitDialog.showUntracked"/>
 	<list key="RepositorySelectionPage.UsedUris">
+		<item value="https://github.com/lelelelemon/WebRecom.git"/>
 		<item value="file:////Users/lemon/git/HomeLibrary"/>
 		<item value="https://github.com/timp21337/htmlparser.git"/>
 		<item value="https://github.com/basti1302/startexplorer"/>
 		<item value="https://lemon2008@bitbucket.org/HaiWang/debug_helper.git"/>
 		<item value="https://bitbucket.org/GkiOllDer/eclipsemonitor"/>
 	</list>
+	<list key="CommitDialog.authorValues">
+		<item value="yjw &lt;wsklxsx@126.com&gt;"/>
+	</list>
+	<list key="CommitDialog.committerValues">
+		<item value="yjw &lt;wsklxsx@126.com&gt;"/>
+	</list>
 	<section name="GitImportWizard">
 		<item value="true" key="GitProjectsImportPage.STORE_NESTED_PROJECTS"/>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.push.PushResultDialog.dialogBounds">
+		<item value="650" key="DIALOG_WIDTH"/>
+		<item value="1|.Helvetica Neue DeskInterface|11.0|0|COCOA|1|.HelveticaNeueDeskInterface-Regular" key="DIALOG_FONT_NAME"/>
+		<item value="440" key="DIALOG_HEIGHT"/>
+		<item value="395" key="DIALOG_X_ORIGIN"/>
+		<item value="105" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="org.eclipse.egit.ui.internal.pull.PullResultDialog.dialogBounds">
 		<item value="671" key="DIALOG_WIDTH"/>
@@ -18,5 +33,14 @@
 		<item value="389" key="DIALOG_HEIGHT"/>
 		<item value="385" key="DIALOG_X_ORIGIN"/>
 		<item value="179" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="org.eclipse.egit.ui.COMMIT_DIALOG_SECTION">
+		<item value="626" key="DIALOG_WIDTH"/>
+		<item value="1|.Helvetica Neue DeskInterface|11.0|0|COCOA|1|.HelveticaNeueDeskInterface-Regular" key="DIALOG_FONT_NAME"/>
+		<item value="623" key="DIALOG_HEIGHT"/>
+		<item value="407" key="DIALOG_X_ORIGIN"/>
+		<item value="0" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="GitCommitMessageComponent">
 	</section>
 </section>

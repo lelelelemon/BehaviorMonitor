@@ -151,3 +151,19 @@ Caused by: java.io.IOException: Packing cancelled during objects writing
 	at org.eclipse.jgit.transport.BasePackPushConnection.writePack(BasePackPushConnection.java:305)
 	at org.eclipse.jgit.transport.BasePackPushConnection.doPush(BasePackPushConnection.java:197)
 	... 8 more
+
+!ENTRY org.eclipse.core.jobs 2 2 2015-07-21 20:24:06.377
+!MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: org.eclipse.egit.ui.internal.push.PushOperationUI$1
+!SESSION 2015-07-21 20:24:10.626 -----------------------------------------------
+eclipse.buildId=4.4.2.M20150204-1700
+java.version=1.8.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product -keyring /Users/lemon/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.java.product -keyring /Users/lemon/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2015-07-21 20:24:18.193
+!MESSAGE System property socksProxyHost has been set to 127.0.0.1 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.core.net 1 0 2015-07-21 20:24:18.202
+!MESSAGE System property socksProxyPort has been set to 1080 by an external source. This value will be overwritten using the values from the preferences
