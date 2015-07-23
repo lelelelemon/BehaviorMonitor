@@ -42,4 +42,4 @@ Bundle-ClassPath: .,
  lib/spring-2.5.6.SEC01.jar,
  lib/spring-test-2.5.1.jar,
  lib/thumbelina.jar
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7

@@ -42,7 +42,9 @@ public class SiteReading extends BaseModelObject {
 	public String getHost() {
 		return this.address.split("/")[2];
 	}
-
+	public void extractHost(){
+		this.host = this.address.split("/")[2];
+	}
 	public Date getStartTime() {
 		return startTime;
 	}

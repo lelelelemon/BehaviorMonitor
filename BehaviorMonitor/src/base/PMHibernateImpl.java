@@ -19,6 +19,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
+import bean.ClusterRelation;
 import bean.Duration;
 import bean.FileReading;
 import bean.OnlineText;
@@ -148,7 +149,8 @@ public class PMHibernateImpl extends HibernateDaoSupport implements
 		List<SiteReading> siteReadings = (List<SiteReading>) getHibernateSession()
 				.createQuery(
 						"from SiteReading where startTime > '" + start
-								+ "' and startTime < '" + end + "'").list();
+								+ "' and startTime < '" + end
+								+ "' order by startTime ASC").list();
 		return siteReadings;
 	}
 
@@ -166,7 +168,9 @@ public class PMHibernateImpl extends HibernateDaoSupport implements
 
 	public List<String> retrieveRecomWeb(String filename) {
 		List<String> recomRelation = (List<String>) getHibernateSession()
-				.createQuery("select webSite from RecomRelation").list();
+				.createQuery(
+						"select webSite from RecomRelation where fileabspath = '"
+								+ filename + "' order by value DESC").list();
 		return recomRelation;
 	}
 
@@ -180,8 +184,38 @@ public class PMHibernateImpl extends HibernateDaoSupport implements
 
 	public List<Duration> retrieveDuration() {
 		List<Duration> durations = (List<Duration>) getHibernateSession()
-				.createQuery("from Duration order by startTime DESC limit 1").list();
+				.createQuery("from Duration order by start DESC limit 1")
+				.list();
 		return durations;
+	}
+
+	public List<FileReading> retrieveFileReading() {
+		List<FileReading> filereadings = (List<FileReading>) getHibernateSession()
+				.createQuery("from FileReading order by startTime DESC limit 1")
+				.list();
+		return filereadings;
+	}
+
+	public List<ClusterRelation> retrieveClusterRela() {
+		List<ClusterRelation> clusterRelas = (List<ClusterRelation>) getHibernateSession()
+				.createQuery("from ClusterRelation").list();
+		return clusterRelas;
+	}
+
+	public List<ClusterRelation> retrieveClusterRelaByLabel(String label) {
+		List<ClusterRelation> clusterRelas = (List<ClusterRelation>) getHibernateSession()
+				.createQuery(
+						"from ClusterRelation where name = '" + label
+								+ "'  order by score DESC").list();
+		return clusterRelas;
+	}
+
+	public List<ClusterRelation> retrieveClusterRelaByAddress(String address) {
+		List<ClusterRelation> clusterRelas = (List<ClusterRelation>) getHibernateSession()
+				.createQuery(
+						"from ClusterRelation where metafile = '" + address
+								+ "'order by score DESC").list();
+		return clusterRelas;
 	}
 
 }

@@ -29,8 +29,11 @@ public class Main {
 		Duration duration = durations.get(0);
 		Date start = duration.getStart();
 		Date end = duration.getEnd();
-		SiteExtraction.retrieveBrowserHisWithLimit("history.xml", start, end);
+		System.out.print("start is " + start);
+		System.out.print("end is " + end);
+		SiteExtraction.retrieveBrowserHisWithLimit("history3.xml", start, end);
 		relationBuild.buildBetween(start, end);
 		
 	}
 }
+ 

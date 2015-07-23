@@ -26,7 +26,7 @@ import base.PMHibernateImpl;
 import bean.OnlineText;
 
 /**
- * 标题:利用htmlparser提取网页纯文本的例子
+ * æ ‡é¢˜:åˆ©ç”¨htmlparseræ��å�–ç½‘é¡µçº¯æ–‡æœ¬çš„ä¾‹å­�
  */
 public class HTMLParserExtraction {
 	public static String testHtml(String str, String className, String charset) {
@@ -146,13 +146,13 @@ public class HTMLParserExtraction {
 		StringBuffer text = new StringBuffer();
 		Parser parser = Parser.createParser(new String(inputHtml.getBytes(),
 				"GBK"), "GBK");
-		// 遍历所有的节点
+		// é��åŽ†æ‰€æœ‰çš„èŠ‚ç‚¹
 		NodeList nodes = parser.extractAllNodesThatMatch(new NodeFilter() {
 			public boolean accept(Node node) {
 				return true;
 			}
 		});
-		System.out.println(nodes.size()); // 打印节点的数量
+		System.out.println(nodes.size()); // æ‰“å�°èŠ‚ç‚¹çš„æ•°é‡�
 		for (int i = 0; i < nodes.size(); i++) {
 			Node nodet = nodes.elementAt(i);
 			text.append(new String(nodet.toPlainTextString().getBytes("GBK"))
@@ -171,6 +171,7 @@ public class HTMLParserExtraction {
 		online1.setStart_time(date1);
 		Date date2 = new Date();
 		online1.setEnd_time(date2);
+		online1.setOnlinetext_id(url);
 		PMHibernateImpl.getInstance().save(online1);
 		System.out.println(title);
 		return false;
@@ -191,6 +192,7 @@ public class HTMLParserExtraction {
 		online1.setStart_time(date1);
 		Date date2 = new Date();
 		online1.setEnd_time(date2);
+		online1.setOnlinetext_id(url);
 		PMHibernateImpl.getInstance().save(online1);
 		System.out.println(title);
 		return false;
@@ -207,6 +209,7 @@ public class HTMLParserExtraction {
 		online1.setStart_time(date1);
 		Date date2 = new Date();
 		online1.setEnd_time(date2);
+		online1.setOnlinetext_id(url);
 		PMHibernateImpl.getInstance().save(online1);
 		System.out.println(title);
 		return false;
@@ -280,11 +283,11 @@ public class HTMLParserExtraction {
 		try {
 			parser.setInputHTML(str);
 			StringBean sb = new StringBean();
-			// 设置不需要得到页面所包含的链接信息
+			// è®¾ç½®ä¸�éœ€è¦�å¾—åˆ°é¡µé�¢æ‰€åŒ…å�«çš„é“¾æŽ¥ä¿¡æ�¯
 			sb.setLinks(false);
-			// 设置将不间断空格由正规空格所替代
+			// è®¾ç½®å°†ä¸�é—´æ–­ç©ºæ ¼ç”±æ­£è§„ç©ºæ ¼æ‰€æ›¿ä»£
 			sb.setReplaceNonBreakingSpaces(true);
-			// 设置将一序列空格由一个单一空格所代替
+			// è®¾ç½®å°†ä¸€åº�åˆ—ç©ºæ ¼ç”±ä¸€ä¸ªå�•ä¸€ç©ºæ ¼æ‰€ä»£æ›¿
 			sb.setCollapse(true);
 			parser.visitAllNodesWith(sb);
 			str = sb.getStrings();
@@ -298,11 +301,11 @@ public class HTMLParserExtraction {
 		String result;
 		Pattern pattern = Pattern.compile("public class.*\n.*");
 		Matcher matcher = pattern.matcher(str);
-		// 匹配一次
+		// åŒ¹é…�ä¸€æ¬¡
 		matcher.find();
 		result = matcher.group();
 		// System.out.println("The filter answer is " + matcher.group()); //
-		// 结果：343
+		// ç»“æžœï¼š343
 		return result;
 	}
 }

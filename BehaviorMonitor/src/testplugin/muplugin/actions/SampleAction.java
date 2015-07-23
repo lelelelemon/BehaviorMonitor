@@ -1,6 +1,8 @@
 package testplugin.muplugin.actions;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -11,6 +13,7 @@ import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 import org.eclipse.ui.PlatformUI;
 
 import base.PMHibernateImpl;
+import bean.ClusterRelation;
 import bean.Duration;
 import bean.FileReading;
 import date.DateUtil;
@@ -28,6 +31,7 @@ public class SampleAction implements IWorkbenchWindowActionDelegate {
 	private String toolTip = "nothing";
 	boolean start = false;
 	Duration duration = new Duration();
+	FileReading filereading;
 
 	/**
 	 * The constructor.
@@ -47,7 +51,7 @@ public class SampleAction implements IWorkbenchWindowActionDelegate {
 					"start");
 			Date st = new Date();
 			duration.setStart(st);
-			System.out.println(DateUtil.format(st, "yyyy-MM-dd hh:mm:ss"));
+			System.out.println(DateUtil.format(st, "yyyy-MM-dd HH:mm:ss"));
 			start = true;
 		} else {
 
@@ -56,7 +60,7 @@ public class SampleAction implements IWorkbenchWindowActionDelegate {
 			PMHibernateImpl.getInstance().save(duration);
 			MessageDialog
 					.openInformation(window.getShell(), "Muplugin", "stop");
-			System.out.println(DateUtil.format(stop, "yyyy-MM-dd hh:mm:ss"));
+			System.out.println(DateUtil.format(stop, "yyyy-MM-dd HH:mm:ss"));
 			start = false;
 			System.exit(0);
 		}
@@ -73,17 +77,56 @@ public class SampleAction implements IWorkbenchWindowActionDelegate {
 	public void selectionChanged(IAction action, ISelection selection) {
 		IEditorPart editor = PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-		if (!this.toolTip.equals(editor.getEditorInput().getToolTipText())) {
-			this.toolTip = editor.getEditorInput().getToolTipText();
+		String filename = editor.getEditorInput().getToolTipText();
+		System.out.println("File name is " + filename);
+		if (!this.toolTip.equals(filename)) {
+			this.toolTip = filename;
 			Date date = new Date();
 			String path = System.getProperty("user.dir");
-			FileReading FileReading = new FileReading();
-			FileReading.setName(this.toolTip);
-			FileReading.setPath(path);
-			FileReading.setStartTime(date);
-			PMHibernateImpl.getInstance().save(FileReading);
-			System.out.println("the name of editor is"
-					+ editor.getEditorInput().getToolTipText());
+			System.out.println("path is " + path);
+			FileReading fileReading = new FileReading();
+			fileReading.setName(this.toolTip);
+			fileReading.setPath(path);
+			fileReading.setStartTime(date);
+			PMHibernateImpl.getInstance().save(fileReading);
+			List<String> addresses = PMHibernateImpl.getInstance()
+					.retrieveRecomWeb(filename);
+			int i = 0;
+			List<String> recoms = new ArrayList<String>();
+			for (String ad : addresses) {
+
+				if (i > 3)
+					break;
+				if (recoms.contains(ad))
+					continue;
+				i++;
+				recoms.add(ad);
+				List<ClusterRelation> clusterRelas = PMHibernateImpl
+						.getInstance().retrieveClusterRelaByAddress(ad);
+				if (!clusterRelas.equals(null) && clusterRelas.size() != 0) {
+					ClusterRelation re = clusterRelas.get(0);
+					System.out.println(re.getScore());
+					List<ClusterRelation> clusterRelaLabel = PMHibernateImpl
+							.getInstance().retrieveClusterRelaByLabel(
+									re.getName());
+					for (ClusterRelation cr : clusterRelaLabel) {
+						if (!recoms.contains(cr.getMetaFile())
+								&& cr.getScore() != 0) {
+							recoms.add(cr.getMetaFile());
+						}
+					}
+
+					recoms.add(re.getScore() + "\n");
+
+				}
+
+			}
+			System.out.println("Start Recom\n");
+			for (String rec : recoms) {
+				System.out.println(rec);
+			}
+
+			System.out.println("Start Recom\n");
 		}
 	}
 

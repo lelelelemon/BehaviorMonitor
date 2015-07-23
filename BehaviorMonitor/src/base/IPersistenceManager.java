@@ -13,6 +13,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import bean.ClusterRelation;
 import bean.Duration;
 import bean.FileReading;
 import bean.OnlineText;
@@ -133,6 +134,14 @@ public interface IPersistenceManager {
 	public List<String> retrieveRecomWeb(String filename);
 
 	public List<FileReading> retrieveFileReading(String start, String end);
-	
+
 	public List<Duration> retrieveDuration();
+
+	public List<FileReading> retrieveFileReading();
+
+	public List<ClusterRelation> retrieveClusterRela();
+
+	public List<ClusterRelation> retrieveClusterRelaByLabel(String label);
+
+	public List<ClusterRelation> retrieveClusterRelaByAddress(String ad);
 }
